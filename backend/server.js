@@ -5,10 +5,18 @@ const { connectDB } = require('./src/db/db');
 const http = require('http');
 const jwt = require('jsonwebtoken');
 const projectModel = require('./src/models/project.model'); // ✅ FIX
+const express = require('express');
+const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
+
+app.use(express.static(path.join(__dirname, "frontend/dist")));
+
+app.get((req, res) => {
+  res.sendFile(path.join(__dirname, "frontend/dist/index.html"));
+});
 
 const io = require('socket.io')(server, {
   cors: {
