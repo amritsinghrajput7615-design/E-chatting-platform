@@ -1,0 +1,23 @@
+import React from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Login } from '../screens/Login'
+import Register from '../screens/Register'
+import  Home  from '../screens/Home'
+import  Project  from '../screens/Project.jsx'
+import UserAuth from '../auth/UserAuth.jsx'
+
+function AppRouter() {
+  return (
+    <BrowserRouter>
+      <Routes>
+       
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<UserAuth><Home /></UserAuth>} />
+        <Route path='/project' element={<UserAuth><Project /></UserAuth>} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default AppRouter
