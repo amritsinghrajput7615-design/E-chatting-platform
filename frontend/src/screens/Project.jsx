@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import { UserContext } from '../context/user.context'
+import { UserContext } from '../context/User.context'
 import { useLocation } from 'react-router-dom'
-import axios from '../config/axios'
+import axios from '../config/Axios'
 import { initializeSocket, receiveMessage, sendMessage } from '../config/socket'
 
 /* ── fonts ── */
