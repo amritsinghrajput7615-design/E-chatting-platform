@@ -8,7 +8,7 @@ const app = express()
 const cors = require('cors')
 
 app.use(cors({
-  origin: "e-chatting-platform-frontend2.vercel.app",
+  origin: true,
   credentials: true
 }))
 app.use(express.json())

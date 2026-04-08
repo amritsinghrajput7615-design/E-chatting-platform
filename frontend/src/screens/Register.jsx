@@ -1,23 +1,36 @@
 
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router'
-import  useAuth  from '../hooks/useAuth.jsx'
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from '../config/Axios.jsx'
+import { UserContext } from '../context/User.context.jsx'
 
 export const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error,setError]= useState('')
-  
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
+  const { setUser } = useContext(UserContext)
+
   const navigate = useNavigate()
-const {register,loading} = useAuth()
+
   const submit = async (e) => {
     e.preventDefault()
-   await register({email,password})
-   navigate('/')
+    setLoading(true)
+
+    try {
+      const res = await axios.post('/user/register', { email, password })
+      localStorage.setItem('token', res.data.token)
+      setUser(res.data.user)
+      navigate('/')
+    } catch (err) {
+      setError(err.response?.data?.message || 'Registration failed')
+    } finally {
+      setLoading(false)
+    }
   }
 
-  if(loading){
-    return(
+  if (loading) {
+    return (
       <div className='text-center mt-20 text-gray-400'>creating account..</div>
     )
   }
