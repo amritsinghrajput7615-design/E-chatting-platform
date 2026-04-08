@@ -8,7 +8,7 @@ const app = express()
 const cors = require('cors')
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "e-chatting-platform-frontend2.vercel.app",
   credentials: true
 }))
 app.use(express.json())
