@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UserContext } from '../context/user.context'
+import { UserContext } from '../context/User.context.jsx'
 import axios from '../config/axios'
 
 const UserAuth = ({ children }) => {
