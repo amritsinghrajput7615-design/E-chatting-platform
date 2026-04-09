@@ -67,11 +67,23 @@ function UserAvatar({ email = '', size = 28 }) {
 const Project = () => {
   const location = useLocation()
 
-  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false)
-  const [isModalOpen,     setIsModalOpen]      = useState(false)
-  const [selectedUserId,  setSelectedUserId]   = useState(new Set())
-  const [project,         setProject]          = useState(location.state.project)
-  const [message,         setMessage]          = useState('')
+  const [project, setProject] = useState(() => {
+    const fromState = location.state?.project
+    const fromStorage = localStorage.getItem("project")
+
+    if (fromState) return fromState
+
+    if (fromStorage) {
+      try {
+        return JSON.parse(fromStorage)
+      } catch (e) {
+        console.error('Error parsing project from localStorage:', e)
+        return null
+      }
+    }
+
+    return null
+  })
   const { user }                               = useContext(UserContext)
   const messageBox                             = useRef(null)
 
